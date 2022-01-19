@@ -1,0 +1,42 @@
+# deployment.yaml
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fiberplane-proxy
+  labels:
+    app: fiberplane-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fiberplane-proxy
+  template:
+    metadata:
+      labels:
+        app: fiberplane-proxy
+    spec:
+      containers:
+      - name: fiberplane-proxy
+        image: "fiberplane/proxy:v1.1.2"
+        env:
+          - name: AUTH_TOKEN
+            value: "{{proxy_api_token}}" # <-- add your Proxy API Token here
+          - name: DATA_SOURCES
+            value: /app/config/data_sources.yaml
+          - name: RUST_LOG
+            value: proxy=debug
+        volumeMounts:
+          - name: data-sources
+            mountPath: /app/config/data_sources.yaml
+            subPath: data_sources.yaml
+      volumes:
+        - name: data-sources
+          configMap:
+            # Provide the name of the ConfigMap containing the files you want
+            # to add to the container
+            name: fiberplane-proxy
+            items:
+              - key: data_sources.yaml
+                path: data_sources.yaml

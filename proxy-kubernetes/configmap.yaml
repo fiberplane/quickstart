@@ -1,0 +1,19 @@
+# configmap.yaml
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fiberplane-proxy
+data:
+  data_sources.yaml: |
+    # Change this file to point to your actual data source(s)
+
+    # More data source types are coming soon!
+
+    # You can add data sources using this format:
+    # The data source name will appear in the Fiberplane Studio
+    Prometheus: # the name of the data source
+      type: prometheus # the type of the data source (for now prometheus only, other source types coming soon)
+      options: # parameters for the data source (usually just URL, but can be port numbers etc)
+        url: http://your-prometheus-server 

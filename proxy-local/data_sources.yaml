@@ -1,0 +1,10 @@
+# data_sources.yaml
+
+---
+
+# Replace the following line with the name of the data source
+Demo Prometheus:
+  type: prometheus
+  options:
+    # Replace the following line with your Prometheus URL
+    url: https://prometheus.fiberplane.com
