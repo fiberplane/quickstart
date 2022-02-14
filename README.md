@@ -1,6 +1,5 @@
 <div align="center">
-  <img alt="Fiberplane Logo" src="assets/fp-logo.png" height="100"/>
-  <h1>Quickstart Fiberplane</h1>
+  <img alt="Fiberplane Logo" src="assets/logo.svg" height="40"/>
   <hr style="border-width: 0.25em"></hr>
 </div>
 
