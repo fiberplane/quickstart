@@ -1,25 +1,14 @@
 <div align="center">
-  <img alt="Fiberplane Logo" src="assets/fp-logo.png" height="200"/>
-  <br>
-  <div align="center">
-    <a href="https://twitter.com/fiberplane">
-      <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/fiberplane?style=flat-square&color=4797FF&logo=twitter" height="25" width="auto">
-    </a>
-  </div>
-
-<br>
-
+  <img alt="Fiberplane Logo" src="assets/fp-logo.png" height="100"/>
   <h1>Quickstart Fiberplane</h1>
-
+  <hr style="border-width: 0.25em"></hr>
 </div>
 
-Fiberplane Studio is available for the [Web](https://fiberplane.com/) (macOS and Linux desktop applications coming soon).
+Fiberplane is a collaborative notebook that connects to your existing observability stack and helps you monitor and debug your infrastructure. Fiberplane is currently available for the Web in Closed Beta - you can sign up for early access [here](https://fiberplane.dev).
 
-To get started go to [https://fiberplane.com/](https://fiberplane.com/) and log in with your Fiberplane account (currently available only for Google with Workspace users). You can also go right away to your notebook by typing [fp.new](https://fp.new) in your URL, however, to save and store your notebook, you will need to log in.
+### How Fiberplane works
 
-## How Fiberplane works
-
-Fiberplane Studio allows you to query, visualize, and understand metrics and logs in your infrastructure. 
+Fiberplane allows you to query, visualize, and understand metrics and logs in your infrastructure. 
 
 Whenever you execute a query in the notebook:
 
@@ -27,6 +16,34 @@ Whenever you execute a query in the notebook:
 2. The Proxy then queries the data source (e.g. your Prometheus or Elastic instance);
 3. The Proxy processes, encrypts, and then returns the data back to the Studio.
 
+# Setting up the Fiberplane Proxy with the CLI
+
+You can explore a Fiberplane Notebook by simply going to [fp.new](https://fp.new) in the address bar of your browser, however, in order to save your notebook or query your observability data you will need to create an account and access to your infrastructure.
+
+This guide will walk you through how to install the Fiberplane Proxy in your infrastructure
+
+
+## Step 1: Download the Fiberplane CLI (beta)
+
+Download the latest `fp` binary using cURL using one of the options below:
+
+#### Mac (Apple Silicon):
+ ```shell
+ curl -O https://fp.dev/fp/latest/macos_aarch64/fp
+ ```
+#### Mac (Intel):
+```shell
+curl -O https://fp.dev/fp/latest/mac_x86_64/fp
+```
+#### Linux / Windows (WSL): 
+```shell
+curl -O https://fp.dev/fp/latest/linux_x86_64/fp
+```
+
+### Optional: add to PATH
+
+
+-----
 
 ## Set up Fiberplane Proxy
 
@@ -43,8 +60,6 @@ The Fiberplane Proxy is available as a [container on Docker Hub](https://hub.doc
 ### 1. Register a Proxy with Fiberplane Studio
 
 In order for the Proxy to talk to the Fiberplane Studio successfully it needs to be successfully authorized. This step will generate a *Proxy API Token* that will be needed later.
-
-![Register a proxy](assets/proxy-register.png)
 
 1. Go to your Fiberplane [Settings page](https://fiberplane.com/settings).
 2. Click **`+ New Proxy`** to register a proxy with a name that identifies the cluster you will install it into (for example, "Production"). This will generate and display a Proxy API Token that the proxy will use to authenticate with the Fiberplane Studio.
