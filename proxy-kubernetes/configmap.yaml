@@ -10,8 +10,8 @@ data:
     # Change this file to point to your actual data source(s)
 
     # You can add data sources using this format:
-    # The data source name will appear in the Fiberplane Studio
-    Prometheus: # <-- The name of the data source
-      type: prometheus # <-- the type of the data source. for now prometheus only, more data sources coming soon!)
-      options: # <-- parameters for the data source (usually just the URL)
-        url: http://your-prometheus-server 
+    
+    Prometheus: # <-------------------------------------------- Set the name of the data source how it should appear in the Fiberplane Studio
+      type: prometheus # <------------------------------------- Set the type of the data source. for now prometheus only, more data sources coming soon!)
+      options:  
+        url: http://your-prometheus-server # <----------------- Set the URL for the data source
