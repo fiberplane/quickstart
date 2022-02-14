@@ -93,12 +93,13 @@ Proxy API Token: XXX_XX # and a token - save this for later!
 1. Clone this repository and grab the example configuration files from `proxy-kubernetes/` folder.
 2. In the `configmap.yaml` set the name, type, and the URL of the data sources (you can use the existing template).
 3. In the `deployment.yaml` add the Proxy API Token generated earlier.
-4. Apply the changes to your Kubernetes cluster by running the following commands:
+4. Place both `configmap.yaml` and `deployment.yaml` at the root of your project directory.
+5. Apply the changes to your Kubernetes cluster by running the following commands:
 ```shell
 kubectl apply -f configmap.yml
 kubectl apply -f deployment.yml
 ```
-5. Kubernetes will automatically download, install, and configure the Fiberplane Proxy container from the [Docker Hub](https://hub.docker.com/r/fiberplane/proxy).
+6. Kubernetes will automatically download, install, and configure the Fiberplane Proxy container from the [Docker Hub](https://hub.docker.com/r/fiberplane/proxy).
 
 
 Once you complete your Proxy setup, your data sources linked in the Proxy configuration should be recognized by the Studio - you can verify this again by going to the **Settings** screen.👇
@@ -106,18 +107,18 @@ Once you complete your Proxy setup, your data sources linked in the Proxy config
 ![List of data sources in settings](assets/proxy-datasource.png)
 
 
-### Run the proxy locally for testing
+### Step 4b: Run the proxy locally for testing
 
-> **Note: this option is only recommended for testing purposes. If you intend to run the Proxy in production, it is strongly recommended to install it in your production cluster (see instructions above).**
+**Note:** this option is only recommended for testing purposes. If you intend to run the Proxy in production, it is strongly recommended to install it in your production cluster (see instructions above).
 
 1. Make sure you have [Docker](https://docs.docker.com/get-docker/) installed.
-2. Create a `data_sources.yaml` in the root directory. Use the template provided at `proxy-local/data_sources.yaml`
-3. Run the following command replacing `<proxy_api_token>` with the Proxy API Token created earlier:
+2. Copy the `data_sources.yaml` example file and place it in the project root directory.
+3. Run the following command replacing `{PROXY_API_TOKEN}` with the API token generated earlier:
   ```shell
   docker run \
     -v "$PWD/data_sources.yaml:/app/data_sources.yaml" \
     fiberplane/proxy:v1.1.2 \
-    --auth-token=<proxy_api_token>`
+    --auth-token={PROXY_API_TOKEN}`
   ```
 
 
