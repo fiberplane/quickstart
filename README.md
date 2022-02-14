@@ -4,11 +4,13 @@
   <hr style="border-width: 0.25em"></hr>
 </div>
 
-Fiberplane is a collaborative notebook that connects to your existing observability stack and helps you monitor and debug your infrastructure. Fiberplane is currently available for the Web in Closed Beta - you can sign up for early access [here](https://fiberplane.dev).
+Fiberplane is a collaborative notebook that connects to your observability stack and helps you monitor and debug your infrastructure. Fiberplane is currently available for the Web in closed beta - you can sign up for early access 👉 **[here](https://fiberplane.dev)**.
+
+You can explore a Fiberplane Notebook by simply going to [fp.new](https://fp.new) in the address bar of your browser, however, in order to save your notebook or query your observability data you will need to create an account and establish access to your infrastructure.
 
 ### How Fiberplane works
 
-Fiberplane allows you to query, visualize, and understand metrics and logs in your infrastructure. 
+Fiberplane accesses your infrastructure through Proxy, a lightweight package, [available as a Docker image](https://hub.docker.com/r/fiberplane/proxy), that once installed allows you to query your observability data from your Notebook.
 
 Whenever you execute a query in the notebook:
 
@@ -16,16 +18,28 @@ Whenever you execute a query in the notebook:
 2. The Proxy then queries the data source (e.g. your Prometheus or Elastic instance);
 3. The Proxy processes, encrypts, and then returns the data back to the Studio.
 
-# Setting up the Fiberplane Proxy with the CLI
+\***Note:**\* Fiberplane Proxy is currently optimized to work with Kubernetes and Prometheus. Elasticsearch, Loki and more providers are coming soon.
 
-You can explore a Fiberplane Notebook by simply going to [fp.new](https://fp.new) in the address bar of your browser, however, in order to save your notebook or query your observability data you will need to create an account and access to your infrastructure.
+This guide will walk you through how to set up the Fiberplane Proxy and install it in your Kubernetes cluster or run it locally for testing purposes.
 
-This guide will walk you through how to install the Fiberplane Proxy in your infrastructure
+#### What is in this repo?
 
+<table>
+<tr>
+    <td>./proxy-kubernetes</td>
+    <td>Sample YAML files to configure and deploy the Fiberplane Proxy to your Kubernetes cluster </td>
+</tr>
+<tr>
+    <td>./proxy-local</td>
+    <td>Sample YAML configuration to deploy the Fiberplane Proxy locally</td>
+</tr>
+</table>
 
-## Step 1: Download the Fiberplane CLI (beta)
+## ⚡️ Setting up the Fiberplane Proxy with the CLI
 
-Download the latest `fp` binary using cURL using one of the options below:
+### Step 1: Download the Fiberplane CLI (beta)
+
+1. Download the latest `fp` binary release with cURL using one of the options below:
 
 #### Mac (Apple Silicon):
  ```shell
@@ -40,16 +54,26 @@ curl -O https://fp.dev/fp/latest/mac_x86_64/fp
 curl -O https://fp.dev/fp/latest/linux_x86_64/fp
 ```
 
-### Optional: add to PATH
+2. Make the `fp` binary executable:
 
+```shell
+chmod 700 ./fp
+```
 
------
+Optional: add the binary to your PATH so you can access it by simply typing `fp` in your prompt.
 
-## Set up Fiberplane Proxy
+### Step 2: Authenticate the CLI
 
-The Fiberplane Proxy is a package that runs in your infrastructure. It enables you to connect the Fiberplane Studio to data sources in your cluster(s) securely without exposing them to the Internet.
+You will need to authenticate the downloaded CLI with your Fiberplane account so you can create and register the Proxies. Simply type:
+```shell
+fp login
+```
 
-The Fiberplane Proxy is available as a [container on Docker Hub](https://hub.docker.com/r/fiberplane/proxy).
+You will be then prompted to login with your account. When you complete the login you can safely close the window.
+
+You can now access your Fiberplane Notebooks through the CLI (see reference for some of the basic available commands)!
+
+### Step 3: 
 
 ### Contents
 
