@@ -137,8 +137,7 @@ docker run \
 
 ## Feedback and support
 
-We're always looking to improve our onboarding experience! Please report any issues and share your feedback by:
+We're always looking to improve our onboarding experience! Please report any issues and share your feedback by either:
 
--   submitting a Github issue;
 -   messaging us on Slack, we're active there (email [support@fiberplane.com](mailto:support@fiberplane.com) for an invite);
 -   emailing us at [support@fiberplane.com](mailto:support@fiberplane.com).
