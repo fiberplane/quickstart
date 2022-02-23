@@ -19,7 +19,6 @@ Whenever you execute a query in the notebook:
 
 \***Note:**\* Fiberplane Proxy is currently optimized to work with Kubernetes and Prometheus. Elasticsearch, Loki and more providers are coming soon.
 
-
 ## ⚡️ Setting up the Fiberplane Proxy with the CLI
 
 This guide will walk you through how to set up the Fiberplane Proxy and install it in your Kubernetes cluster or run it locally for testing purposes.
@@ -39,32 +38,47 @@ This guide will walk you through how to set up the Fiberplane Proxy and install 
 
 ### Step 1: Download the Fiberplane CLI (beta)
 
-1. Download the latest `fp` binary release with cURL using one of the options below:
+You can download and install the Fiberplane CLI `fp` with one command:
 
-#### Mac (Apple Silicon):
- ```shell
- curl -O https://fp.dev/fp/latest/macos_aarch64/fp
- ```
-#### Mac (Intel):
 ```shell
-curl -O https://fp.dev/fp/latest/mac_x86_64/fp
-```
-#### Linux / Windows (WSL): 
-```shell
-curl -O https://fp.dev/fp/latest/linux_x86_64/fp
+curl --proto '=https' --tlsv1.2 -sSf https://fp.dev/install.sh | sh
 ```
 
-2. Make the `fp` binary executable:
+<details>
+<summary>Alternatively: Download the latest binaries directly with cURL (click to expand)</summary>
+
+#### Download the latest `fp` binary release with cURL using one of the options below:
+
+##### Mac (Apple Silicon):
+
+```shell
+curl -O https://fp.dev/fp/latest/aarch64-apple-darwin/fp
+```
+
+##### Mac (Intel):
+
+```shell
+curl -O https://fp.dev/fp/latest/x86_64-apple-darwin/fp
+```
+
+##### Linux / Windows (WSL):
+
+```shell
+curl -O https://fp.dev/fp/latest/x86_64-unknown-linux-gnu/fp
+```
+
+#### Make the `fp` binary executable:
 
 ```shell
 chmod 700 ./fp
 ```
 
-Optional: add the binary to your PATH so you can access it by simply typing `fp` in your prompt.
+</details>
 
 ### Step 2: Authenticate the CLI
 
 You will need to authenticate the downloaded CLI with your Fiberplane account so you can create and register the Proxies. Simply type:
+
 ```shell
 fp login
 ```
@@ -94,17 +108,17 @@ Proxy API Token: XXX_XX # and a token - save this for later!
 3. In the `deployment.yaml` add the Proxy API Token generated earlier.
 4. Place both `configmap.yaml` and `deployment.yaml` at the root of your project directory.
 5. Apply the changes to your Kubernetes cluster by running the following commands:
+
 ```shell
 kubectl apply -f configmap.yml
 kubectl apply -f deployment.yml
 ```
-6. Kubernetes will automatically download, install, and configure the Fiberplane Proxy container from the [Docker Hub](https://hub.docker.com/r/fiberplane/proxy).
 
+6. Kubernetes will automatically download, install, and configure the Fiberplane Proxy container from the [Docker Hub](https://hub.docker.com/r/fiberplane/proxy).
 
 Once you complete your Proxy setup, your data sources linked in the Proxy configuration should be recognized by the Studio - you can verify this again by going to the **Settings** screen.👇
 
 ![List of data sources in settings](assets/proxy-datasource.png)
-
 
 ### Step 4b: Run the proxy locally for testing
 
@@ -113,18 +127,18 @@ Once you complete your Proxy setup, your data sources linked in the Proxy config
 1. Make sure you have [Docker](https://docs.docker.com/get-docker/) installed.
 2. Copy the `data_sources.yaml` example file and place it in the project root directory.
 3. Run the following command replacing `{PROXY_API_TOKEN}` with the API token generated earlier:
-  ```shell
-  docker run \
-    -v "$PWD/data_sources.yaml:/app/data_sources.yaml" \
-    fiberplane/proxy:v1.1.2 \
-    --auth-token={PROXY_API_TOKEN}`
-  ```
 
+```shell
+docker run \
+  -v "$PWD/data_sources.yaml:/app/data_sources.yaml" \
+  fiberplane/proxy:v1.1.2 \
+  --auth-token={PROXY_API_TOKEN}`
+```
 
 ## Feedback and support
 
 We're always looking to improve our onboarding experience! Please report any issues and share your feedback by:
 
-* submitting a Github issue;
-* messaging us on Slack, we're active there (email [support@fiberplane.com](mailto:support@fiberplane.com) for an invite);
-* emailing us at [support@fiberplane.com](mailto:support@fiberplane.com).
+-   submitting a Github issue;
+-   messaging us on Slack, we're active there (email [support@fiberplane.com](mailto:support@fiberplane.com) for an invite);
+-   emailing us at [support@fiberplane.com](mailto:support@fiberplane.com).
