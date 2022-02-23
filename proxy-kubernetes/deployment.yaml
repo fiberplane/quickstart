@@ -22,7 +22,7 @@ spec:
         image: "fiberplane/proxy:v1.1.2"
         env:
           - name: AUTH_TOKEN
-            value: "<proxy_api_token>" # <-- add your Proxy API Token here!
+            value: "{PROXY_API_TOKEN}" # <---------------- add your Proxy API Token here!
           - name: DATA_SOURCES
             value: /app/config/data_sources.yaml
           - name: RUST_LOG
