@@ -45,7 +45,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://fp.dev/install.sh | sh
 ```
 
 <details>
-<summary><h4>Alternatively: Download the latest binaries directly with cURL (click to expand)</h4></summary>
+<summary><strong>Alternatively: Download the latest binaries directly with cURL (click to expand)</strong></summary>
 
 Mac (Apple Silicon):
 
