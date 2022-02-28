@@ -45,33 +45,29 @@ curl --proto '=https' --tlsv1.2 -sSf https://fp.dev/install.sh | sh
 ```
 
 <details>
-<summary>Alternatively: Download the latest binaries directly with cURL (click to expand)</summary>
+<summary><h4>Alternatively: Download the latest binaries directly with cURL (click to expand)</h4></summary>
 
-#### Download the latest `fp` binary release with cURL using one of the options below:
-
-##### Mac (Apple Silicon):
+Mac (Apple Silicon):
 
 ```shell
 curl -O https://fp.dev/fp/latest/aarch64-apple-darwin/fp
+chmod 755 ./fp
 ```
 
-##### Mac (Intel):
+Mac (Intel):
 
 ```shell
 curl -O https://fp.dev/fp/latest/x86_64-apple-darwin/fp
+chmod 755 ./fp
 ```
 
-##### Linux / Windows (WSL):
+Linux / Windows (WSL):
 
 ```shell
 curl -O https://fp.dev/fp/latest/x86_64-unknown-linux-gnu/fp
+chmod 755 ./fp
 ```
 
-#### Make the `fp` binary executable:
-
-```shell
-chmod 700 ./fp
-```
 
 </details>
 
