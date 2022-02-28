@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="Fiberplane Logo" src="assets/logo.svg" height="40"/>
+  <img alt="Fiberplane Logo" src="assets/fp-logo.svg" height="75"/>
   <hr style="border-width: 0.25em"></hr>
 </div>
 
@@ -131,7 +131,7 @@ Once you complete your Proxy setup, your data sources linked in the Proxy config
 ```shell
 docker run \
   -v "$PWD/data_sources.yaml:/app/data_sources.yaml" \
-  fiberplane/proxy:v1.1.2 \
+  fiberplane/proxy:v1 \
   --auth-token={PROXY_API_TOKEN}`
 ```
 
