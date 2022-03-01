@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: fiberplane-proxy
-        image: "fiberplane/proxy:v1.1.2"
+        image: "fiberplane/proxy:v1"
         env:
           - name: AUTH_TOKEN
             value: "{PROXY_API_TOKEN}" # <---------------- add your Proxy API Token here!
