@@ -81,18 +81,15 @@ fp login
 
 You will be then prompted to login with your account. When you complete the login you can safely close the window.
 
-You can now access your Fiberplane Notebooks through the CLI (see reference for some of the basic available commands)!
-
-<!-- TODO: add a CLI reference link -->
 
 ### Step 3: Register a Proxy with Fiberplane
 
 In order for the Proxy to receive queries from Fiberplane Notebooks, it needs to be authorized. This step will generate a **Proxy API Token** that will be needed in later steps.
 
-To register a proxy run a command `fp proxy add`:
+To register a proxy run a command `fp proxies add`:
 
 ```
-$ fp proxy add
+$ fp proxies add
 Added proxy "robust-antelope" # generates a random name
 Proxy API Token: XXX_XX # and a token - save this for later!
 ```
