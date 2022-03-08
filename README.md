@@ -103,8 +103,8 @@ Proxy API Token: XXX_XX # and a token - save this for later!
 5. Apply the changes to your Kubernetes cluster by running the following commands:
 
 ```shell
-kubectl apply -f configmap.yml
-kubectl apply -f deployment.yml
+kubectl apply -f configmap.yaml
+kubectl apply -f deployment.yaml
 ```
 
 6. Kubernetes will automatically download, install, and configure the Fiberplane Proxy container from the [Docker Hub](https://hub.docker.com/r/fiberplane/proxy).
