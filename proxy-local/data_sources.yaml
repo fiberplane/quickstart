@@ -2,9 +2,14 @@
 
 ---
 
-# Replace the following line with the name of the data source
-Demo Prometheus:
+My Prometheus server:
   type: prometheus
-  options:
-    # Replace the following line with your Prometheus URL
-    url: https://prometheus.fiberplane.com
+  url: http://prometheus-server
+    
+My Elasticsearch server:
+  type: elasticsearch
+  url: http://username:password@elastic-server
+    
+My Loki server:
+  type: loki
+  url: http://loki-server:port
