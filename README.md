@@ -68,7 +68,6 @@ curl -O https://fp.dev/fp/latest/x86_64-unknown-linux-gnu/fp
 chmod 755 ./fp
 ```
 
-
 </details>
 
 ### Step 2: Authenticate the CLI
@@ -81,15 +80,14 @@ fp login
 
 You will be then prompted to login with your account. When you complete the login you can safely close the window.
 
-
 ### Step 3: Register a Proxy with Fiberplane
 
 In order for the Proxy to receive queries from Fiberplane Notebooks, it needs to be authorized. This step will generate a **Proxy API Token** that will be needed in later steps.
 
-To register a proxy run a command `fp proxies add`:
+To register a proxy run a command `fp proxies create`:
 
 ```
-$ fp proxies add
+$ fp proxies create
 Added proxy "robust-antelope" # generates a random name
 Proxy API Token: XXX_XX # and a token - save this for later!
 ```
