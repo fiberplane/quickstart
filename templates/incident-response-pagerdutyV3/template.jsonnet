@@ -43,7 +43,7 @@ function(
   .addCells([
     c.text([fmt.bold(['PagerDuty URL: ']), event.data.html_url]), // link back to the incident on PagerDuty
     c.text([fmt.bold(['Incident ID: ']), fmt.code([event.data.id])]),
-    c.text([fmt.bold(['Assigned to: ']), event.data.assignees[0].summary,]), // assigned first to the person who created the incident
+    c.text([fmt.bold(['Assigned to: ']), event.data.assignees[0].summary,]), //shows who the incident is assigned to, as per the Pagerduty escalation policy and schedule for the service
     c.h3('Summary'),
     c.text(''),
     c.divider(readOnly=true),
