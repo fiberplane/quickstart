@@ -1,0 +1,8 @@
+---
+Our dockerized Loki server:
+    type: loki
+    url: http://loki:3100
+
+Our dockerized Prometheus server:
+    type: prometheus
+    url: http://prometheus:9090

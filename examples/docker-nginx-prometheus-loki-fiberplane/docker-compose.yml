@@ -1,0 +1,56 @@
+version: "3.4"
+
+services:
+    my-nginx-service:
+        image: nginx
+        container_name: my-nginx-service
+        ports:
+            - 8000:80
+        logging:
+            driver: loki
+            options:
+                loki-url: http://localhost:3100/loki/api/v1/push
+                loki-external-labels: app=nginx,job=docker,owner=fiberplane,environment=development
+
+    prometheus:
+        image: prom/prometheus
+        ports:
+            - "9090:9090"
+        volumes:
+            - ./config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+        logging:
+            driver: loki
+            options:
+                loki-url: http://localhost:3100/loki/api/v1/push
+                loki-external-labels: app=prometheus,job=docker,owner=fiberplane,environment=development
+
+    node-exporter:
+        image: prom/node-exporter
+        ports:
+            - "9100:9100"
+
+    loki:
+        image: grafana/loki:2.5.0
+        container_name: loki
+        ports:
+            - "3100:3100"
+        command: -config.file=/etc/loki/local-config.yaml
+        volumes:
+            - ./config/loki.yaml:/etc/config/loki.yaml
+        entrypoint:
+            - /usr/bin/loki
+            - -config.file=/etc/config/loki.yaml
+
+    fiberplane-proxy:
+        image: fiberplane/proxy:v1
+        container_name: fiberplane-proxy
+        depends_on:
+            - "loki"
+        volumes:
+            - "./config/data_sources.yaml:/app/data_sources.yaml"
+        command: "--auth-token=${PROXY_API_TOKEN}" # add the Proxy API Token to a .env file
+        logging:
+            driver: loki
+            options:
+                loki-url: http://localhost:3100/loki/api/v1/push
+                loki-external-labels: app=proxy,job=docker,owner=fiberplane,environment=development
