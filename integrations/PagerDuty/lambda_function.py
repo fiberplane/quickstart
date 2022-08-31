@@ -47,27 +47,11 @@ def get_pd_user(userid, pd_api_key):
     user_details = requests.request("GET", pd_url, headers=headers).json()
     return(user_details['user']['email'])
 
-'''
-Function to post the notebook url to slack
-'''
-def post_to_slack(slack_wh,notebookUrl, pd_inc_url):
-    payload = json.dumps({
-        "type": "mrkdwn",
-        "text": f":fire:Fiberplane <{notebookUrl}|notebook> created for <{pd_inc_url}| an incident> on your service:rotating_light:"
-    })
-    headers = {
-        'Content-type': 'application/json'
-    }
-    response = requests.request("POST", slack_wh, headers=headers, data=payload)
-    return response.text
-
 def lambda_handler(event, context):
     payload = json.loads(event['body']) # get event details passed by pd from lambda request body
     trigger = event['headers']['fp-trigger'] # get fp trigger value from custom header passed by pagerduty
     pd_api_key = event['headers']['pd-apikey'] # get pd api key from custom header
     pd_incident = payload['event']['data']['id'] # get pd incident id
-    pd_inc_url = payload['event']['data']['html_url'] # get pd incident url
-    slack_wh = event['headers']['slack-webhook'] # get slack webhook
     if 'email' in event['headers']: # check if email is passed in custom headers, if yes, use it to write notes
         userid = event['headers']['email']
     else:
@@ -76,7 +60,6 @@ def lambda_handler(event, context):
     fp_details = post_to_fp(payload,trigger) # capture response from fp notebook creation
     notes = fp_details['notebookUrl'] # notebook url parsed off fp response
     post_to_pd(pd_incident, notes, pd_api_key, userid) # send it back to pd api to write as a note
-    post_to_slack(slack_wh,fp_details['notebookUrl'],pd_inc_url) # post notebook url to slack
 
     return {
         'statusCode': 200,
