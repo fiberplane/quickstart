@@ -8,7 +8,7 @@ This is an example template that illustrates how Fiberplane can work with your a
 
 Setup the workflow: 0. (prerequisite) make sure you have the Fiberplane CLI installed;
 
-1. Pull down this repo;
+1. Download the template.jsonnet file: `curl -Lo template.jsonnet https://raw.githubusercontent.com/fiberplane/quickstart/main/templates/incident-response-pagerdutyV2/template.jsonnet`;
 2. Add the local template jsonnet file to your Fiberplane:
    $ fp templates create --title="Name of your template" /path/to/the/template.jsonnet
    -> copy the ID of the template
