@@ -1,0 +1,3 @@
+my elastic:
+  type: elasticsearch
+  url: http://elastic:test@elasticsearch:9200

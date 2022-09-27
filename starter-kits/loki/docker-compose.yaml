@@ -1,0 +1,36 @@
+version: '3.9'
+
+networks:
+  loki:
+
+services:
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - loki
+
+  promtail:
+    image: grafana/promtail:latest
+    volumes:
+      - /var/log:/var/log
+      - ./config.yml:/etc/promtail/config.yml
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - loki
+
+  fp-proxy:
+    image: fiberplane/proxy:v1
+    container_name: fp-proxy
+    restart: unless-stopped
+    volumes:
+      - ./data_sources.yaml:/app/data_sources.yaml
+    command:
+      -  --auth-token=${TOKEN:?err}
+    networks:
+      - loki
+    depends_on:
+      - loki
+      - promtail

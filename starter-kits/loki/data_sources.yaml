@@ -1,0 +1,3 @@
+my loki:
+  type: loki
+  url: http://loki:3100

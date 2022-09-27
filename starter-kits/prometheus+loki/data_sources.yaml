@@ -1,0 +1,7 @@
+my Prometheus:
+  type: prometheus
+  url: http://prometheus:9090
+
+my loki:
+  type: loki
+  url: http://loki:3100
