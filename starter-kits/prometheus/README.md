@@ -49,5 +49,3 @@ Now that you have everything setup, you are ready to create your first notebook.
 
 
 The full documentation for using notebooks and templates can be found on our [documentation site](https://docs.fiberplane.com)
-
-_make sure all hyperlinks are correct_
