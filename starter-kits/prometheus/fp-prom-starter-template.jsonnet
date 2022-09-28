@@ -4,7 +4,7 @@ local c = fp.cell;
 local fmt = fp.format;
 
 function(
-  title='Your first notebook 🚀 '
+  title='Your prometheus notebook 🚀 '
 )
   fp.notebook
   .new(title)
@@ -12,31 +12,6 @@ function(
   .addLabels({
   'type': 'starter-kit',
   })
-  .addDirectDataSource(
-    type='prometheus',
-    name='default',
-    config={
-      url: 'https://prometheus.dev.fiberplane.io',
-    },
-  )
-  .addProxyDataSource(
-    alias='default-elasticsearch',
-    name='elastic',
-    proxyId='4jRwcOQVTL2bglOv2wSLUA',
-    type='elasticsearch'
-  )
-  .addProxyDataSource(
-    alias='default-loki',
-    name='Dockerized Loki server',
-    proxyId='nBg-61oeTTSxWkEnKO9kbA',
-    type='loki'
-  )
-  .addProxyDataSource(
-    alias='default-prometheus',
-    name='my Prometheus',
-    proxyId='kbZps5khQvqxLUmDLxpe8w',
-    type='prometheus'
-  )
   .addCells([
     c.text(['This is a preview notebook that shows basic infrastructure data from the Prometheus instance you just set up using the Starter Kit. Make sure to select ', fmt.bold(['Prometheus as a datasource in the top right']), '. Happy troubleshooting!!!']),
     c.h3('Prometheus health check'),
