@@ -43,7 +43,7 @@ services:
     volumes:
       - ./data_sources.yaml:/app/data_sources.yaml
     command:
-      - --auth-token=${TOKEN:?err}
+      - --auth-token=${FP_PROXY_TOKEN:?err}
       - --status-check-interval=15s
     networks:
       - elastic
