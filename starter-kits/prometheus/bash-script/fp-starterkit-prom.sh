@@ -1,7 +1,7 @@
 #!/bin/bash
 ### This script is for Linux & Macbooks ###
 create_prometheus_config() {
-cat > prometheus.yml << EOF
+cat > prometheus.yaml << EOF
 global:
   scrape_interval: 15s
 
@@ -25,7 +25,7 @@ EOF
 }
 
 create_docker_compose() {
-cat > docker-compose.yml << EOF
+cat > docker-compose.yaml << EOF
 version: '3.9'
 
 services:
@@ -45,9 +45,9 @@ services:
     container_name: prometheus
     restart: unless-stopped
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yaml
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--config.file=/etc/prometheus/prometheus.yaml'
     expose:
       - 9090
     depends_on:
@@ -68,7 +68,7 @@ EOF
 }
 
 run_docker_compose() {
-  if [[ -f data_sources.yaml && -f prometheus.yml && docker-compose.yml ]]; then
+  if [[ -f data_sources.yaml && -f prometheus.yaml && docker-compose.yaml ]]; then
     sudo docker-compose -p fp-starter-kit up -d
     echo `sudo docker ps`
   fi
@@ -77,9 +77,9 @@ run_docker_compose() {
 main() {
   read -p "Pre-Requisite: Prometheus, Node Exporter and Fibeplane proxy all run as docker containers, managed by docker compose. Hence please make sure you have docker and docker-compose installed and running before executing this script further. Are you happy to proceed (y/n)? " consent
   case "$consent" in
-    y|Y ) 
+    y|Y )
       read -p "Please enter your Fiberplane token : " token
-      if [ "$token" = "" ]; then   
+      if [ "$token" = "" ]; then
         echo "You have not entered the Fiberplane token, please make sure you have the token handy before re-running the script. To generate one, please refer - https://docs.fiberplane.com/quickstart/set-up-the-fiberplane-proxy#cae32ee6460b490a98aa0ecf7fd82a71"
         exit 1
       fi
@@ -88,10 +88,10 @@ main() {
       create_docker_compose $token
       run_docker_compose
       ;;
-    n|N ) 
-      echo "You have chosen to not run the Fiberplane starter kit, if it was a mistake, please re-run the script. If it was about pre-requisites, please install docker and docker-compose and ensure they are running before you re-run this script." 
+    n|N )
+      echo "You have chosen to not run the Fiberplane starter kit, if it was a mistake, please re-run the script. If it was about pre-requisites, please install docker and docker-compose and ensure they are running before you re-run this script."
       ;;
-    * ) 
+    * )
       echo "Invalid Choice, please enter y/Y or n/N to choose if you want to run the script or not."
       ;;
   esac

@@ -1,0 +1,58 @@
+version: '3.9'
+
+networks:
+  default:
+    name: fp
+    external: true
+
+services:
+  node-exporter:
+    image: prom/node-exporter:latest
+    ports:
+      - "9100:9100"
+    container_name: node-exporter
+    restart: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    restart: unless-stopped
+    volumes:
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yaml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yaml'
+    depends_on:
+      - node-exporter
+
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+
+  promtail:
+    image: grafana/promtail:latest
+    volumes:
+      - /var/log:/var/log
+      - ./config.yaml:/etc/promtail/config.yaml
+    command: -config.file=/etc/promtail/config.yaml
+
+  fp-proxy:
+    image: fiberplane/proxy:v1
+    container_name: fp-proxy
+    restart: unless-stopped
+    volumes:
+      - ./data_sources.yaml:/app/data_sources.yaml
+    command:
+      -  --auth-token=${TOKEN:?err}
+    depends_on:
+      - prometheus
+      - node-exporter
+      - loki
+      - promtail
