@@ -18,9 +18,11 @@ EOF
 
 create_data_sources_config() {
 cat > data_sources.yaml << EOF
-my Prometheus:
-  type: prometheus
-  url: http://prometheus:9090
+- name: my-prometheus-instance # name can only contain lowercase alphanumeric characters or '-'
+  description: My Prometheus Instance
+  providerType: prometheus
+  config:
+    url: http://prometheus:9090
 EOF
 }
 

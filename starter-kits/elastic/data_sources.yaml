@@ -1,3 +1,5 @@
-my elastic:
-  type: elasticsearch
-  url: http://elastic:test@elasticsearch:9200
+- name: my-elasticsearch-instance # name can only contain lowercase alphanumeric characters or '-'
+  description: My Elasticsearch Instance
+  providerType: elasticsearch
+  config:
+    url: http://elastic:test@elasticsearch:9200

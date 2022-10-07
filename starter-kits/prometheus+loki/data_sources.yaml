@@ -1,7 +1,11 @@
-my Prometheus:
-  type: prometheus
-  url: http://prometheus:9090
+- name: my-prometheus-instance # name can only contain lowercase alphanumeric characters or '-'
+  description: My Prometheus Instance
+  providerType: prometheus
+  config:
+    url: http://prometheus:9090
 
-my loki:
-  type: loki
-  url: http://loki:3100
+- name: my-loki-instance # name can only contain lowercase alphanumeric characters or '-'
+  description: My Loki Instance
+  providerType: loki
+  config:
+    url: http://loki:3100
