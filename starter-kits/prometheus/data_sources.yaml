@@ -1,0 +1,5 @@
+- name: starter-prom
+  description: Prometheus starterkit
+  providerType: prometheus
+  config:
+    url: http://prometheus:9090 
