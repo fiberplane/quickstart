@@ -1,7 +1,11 @@
-my Prometheus:
-  type: prometheus
-  url: http://prometheus:9090
+- name: starter-prom
+  description: Prometheus starterkit
+  providerType: prometheus
+  config:
+    url: http://prometheus:9090
 
-my loki:
-  type: loki
-  url: http://loki:3100
+- name: starter-loki
+  description: Loki starterkit
+  providerType: loki
+  config:
+    url: http://loki:3100
