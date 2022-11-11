@@ -1,3 +1,5 @@
-my elastic:
-  type: elasticsearch
-  url: http://elastic:test@elasticsearch:9200
+- name: elastic-starter
+  description: ElasticSearch for starter kit
+  providerType: elasticsearch
+  config:
+    url: http://elasticsearch:9200
