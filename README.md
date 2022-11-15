@@ -27,18 +27,22 @@ This guide will walk you through how to set up the Fiberplane Proxy and install 
 
 <table>
 <tr>
-    <td>proxy-kubernetes/</td>
-    <td>Sample YAML files to configure and deploy the Fiberplane Proxy to your Kubernetes cluster </td>
+    <td>integrations/</td>
+    <td>Available plugins that can work with Fiberplane Templates</td>
 </tr>
 <tr>
-    <td>proxy-local/</td>
-    <td>Sample YAML configuration to deploy the Fiberplane Proxy locally</td>
+    <td>starter-kits/</td>
+    <td>Sample docker-compose files to start up your Prometheus, Elasticsearch, Loki instances</td>
+</tr>
+<tr>
+    <td>templates/</td>
+    <td>Sample Fiberplane templates to help get you started building workflows</td>
 </tr>
 </table>
 
-### Step 1: Download the Fiberplane CLI (beta)
+### Pre-requisite: Download the Fiberplane CLI (beta)
 
-You can download and install the Fiberplane CLI `fp` with one command:
+To work with Fiberplane Templates and setup Providers you will need to install the Fiberplane CLI. You can download and install `fp` with one command:
 
 ```shell
 curl --proto '=https' --tlsv1.2 -sSf https://fp.dev/install.sh | sh
@@ -70,7 +74,7 @@ chmod 755 ./fp
 
 </details>
 
-### Step 2: Authenticate the CLI
+### Step 1: Authenticate the CLI
 
 You will need to authenticate the downloaded CLI with your Fiberplane account so you can create and register the Proxies. Simply type:
 
@@ -80,7 +84,7 @@ fp login
 
 You will be then prompted to login with your account. When you complete the login you can safely close the window.
 
-### Step 3: Register a Proxy with Fiberplane
+### Step 2: Register a Proxy with Fiberplane
 
 In order for the Proxy to receive queries from Fiberplane Notebooks, it needs to be authorized. This step will generate a **Proxy API Token** that will be needed in later steps.
 
@@ -92,7 +96,7 @@ Added proxy "robust-antelope" # generates a random name
 Proxy API Token: XXX_XX # and a token - save this for later!
 ```
 
-### Step 4: Deploy the Proxy to your Kubernetes cluster
+### Step 3: Deploy the Proxy to your Kubernetes cluster
 
 1. Clone this repository and grab the example configuration files from `proxy-kubernetes/` folder.
 2. In the `configmap.yaml` set the name, type, and the URL of the data sources (you can use the existing template).
@@ -111,7 +115,7 @@ Once you complete your Proxy setup, your data sources linked in the Proxy config
 
 ![List of data sources in settings](assets/proxy-datasource.png)
 
-### Step 4b: Run the proxy locally for testing
+### Step 3b: Run the Proxy locally for testing
 
 **Note:** this option is only recommended for testing purposes. If you intend to run the Proxy in production, it is strongly recommended to install it in your production cluster (see instructions above).
 
@@ -122,13 +126,13 @@ Once you complete your Proxy setup, your data sources linked in the Proxy config
 ```shell
 docker run \
   -v "$PWD/data_sources.yaml:/app/data_sources.yaml" \
-  fiberplane/proxy:v1 \
-  --auth-token={PROXY_API_TOKEN}`
+  fiberplane/proxy:v2 \
+  --token={PROXY_API_TOKEN}`
 ```
 
 ## Feedback and support
 
 We're always looking to improve our onboarding experience! Please report any issues and share your feedback by either:
 
--   messaging us on Slack, we're active there (email [support@fiberplane.com](mailto:support@fiberplane.com) for an invite);
--   emailing us at [support@fiberplane.com](mailto:support@fiberplane.com).
+- emailing us at [support@fiberplane.com](mailto:support@fiberplane.com).
+- submitting an issue here on Github.

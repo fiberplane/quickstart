@@ -1,3 +1,5 @@
-my loki:
-  type: loki
-  url: http://loki:3100
+- name: starter-loki
+  description: Loki starterkit
+  providerType: loki
+  config:
+    url: http://loki:3100

@@ -1,5 +1,8 @@
 version: '3.9'
 
+networks:
+  prom:
+
 services:
   node-exporter:
     image: prom/node-exporter:latest
@@ -26,13 +29,13 @@ services:
       - node-exporter
 
   fp-proxy:
-    image: fiberplane/proxy:v1
+    image: fiberplane/proxy:v2
     container_name: fp-proxy
     restart: unless-stopped
     volumes:
       - ./data_sources.yaml:/app/data_sources.yaml
     command:
-      -  --auth-token=${FP_PROXY_TOKEN:?err}
+      - --token=${FP_PROXY_TOKEN:?err}
     depends_on:
       - prometheus
       - node-exporter

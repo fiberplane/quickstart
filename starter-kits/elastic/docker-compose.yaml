@@ -15,8 +15,6 @@ services:
       resources:
         limits:
           memory: 60m
-    networks:
-      - elastic
 
   elasticsearch:
     image: elasticsearch:8.4.1
@@ -33,25 +31,12 @@ services:
           memory: 1g
     depends_on:
       - fluent-bit
-    networks:
-      - elastic
 
   fp-proxy:
-    image: fiberplane/proxy:v1
-    container_name: fp-proxy
+    image: fiberplane/proxy:v2
     restart: unless-stopped
     volumes:
       - ./data_sources.yaml:/app/data_sources.yaml
     command:
-      - --auth-token=${FP_PROXY_TOKEN:?err}
-      - --status-check-interval=15s
-    networks:
-      - elastic
-    depends_on:
-      - elasticsearch
-      - fluent-bit
-  
-
-
-  
-
+      - --status-check-interval=5s
+      - --token=${FP_PROXY_TOKEN:?err}

@@ -44,13 +44,13 @@ services:
     command: -config.file=/etc/promtail/config.yaml
 
   fp-proxy:
-    image: fiberplane/proxy:v1
+    image: fiberplane/proxy:v2
     container_name: fp-proxy
     restart: unless-stopped
     volumes:
       - ./data_sources.yaml:/app/data_sources.yaml
     command:
-      -  --auth-token=${FP_PROXY_TOKEN:?err}
+      - --token=${FP_PROXY_TOKEN:?err}
     depends_on:
       - prometheus
       - node-exporter
