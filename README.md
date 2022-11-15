@@ -126,8 +126,8 @@ Once you complete your Proxy setup, your data sources linked in the Proxy config
 ```shell
 docker run \
   -v "$PWD/data_sources.yaml:/app/data_sources.yaml" \
-  fiberplane/proxy:v1 \
-  --auth-token={PROXY_API_TOKEN}`
+  fiberplane/proxy:v2 \
+  --token={PROXY_API_TOKEN}`
 ```
 
 ## Feedback and support
