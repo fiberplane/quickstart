@@ -33,7 +33,7 @@ services:
       - fluent-bit
 
   fp-proxy:
-    image: fiberplane/proxy:v1
+    image: fiberplane/proxy:v2
     restart: unless-stopped
     volumes:
       - ./data_sources.yaml:/app/data_sources.yaml
