@@ -9,7 +9,7 @@ You can explore a Fiberplane Notebook by simply going to [fp.new](https://fp.new
 
 ### How Fiberplane works
 
-Fiberplane accesses your infrastructure through Proxy, a lightweight package, [available as a Docker image](https://hub.docker.com/r/fiberplane/proxy), that once installed allows you to query your observability data from your Notebook.
+Fiberplane accesses your infrastructure through Proxy, a lightweight package, [available as a Docker image](https://hub.docker.com/r/fiberplane/fpd), that once installed allows you to query your observability data from your Notebook.
 
 Whenever you execute a query in the notebook:
 
@@ -109,7 +109,7 @@ kubectl apply -f configmap.yaml
 kubectl apply -f deployment.yaml
 ```
 
-6. Kubernetes will automatically download, install, and configure the Fiberplane Proxy container from the [Docker Hub](https://hub.docker.com/r/fiberplane/proxy).
+6. Kubernetes will automatically download, install, and configure the Fiberplane Proxy container from the [Docker Hub](https://hub.docker.com/r/fiberplane/fpd).
 
 Once you complete your Proxy setup, your data sources linked in the Proxy configuration should be recognized by the Studio - you can verify this again by going to the **Settings** screen.👇
 
