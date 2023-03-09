@@ -44,7 +44,15 @@ This guide will walk you through how to set up the Fiberplane Proxy and install 
 
 To work with Fiberplane Templates and setup Providers you will need to install the Fiberplane CLI. You can download and install `fp` with one command:
 
-```shell
+Either Homebrew:
+
+```bash
+brew install fiberplane/tap/fp
+```
+
+or install script:
+
+```bash
 curl --proto '=https' --tlsv1.2 -sSf https://fp.dev/install.sh | sh
 ```
 
@@ -84,50 +92,44 @@ fp login
 
 You will be then prompted to login with your account. When you complete the login you can safely close the window.
 
-### Step 2: Register a Proxy with Fiberplane
+### Step 2: Register an `fpd` (Fiberplane Daemon) with Fiberplane
 
-In order for the Proxy to receive queries from Fiberplane Notebooks, it needs to be authorized. This step will generate a **Proxy API Token** that will be needed in later steps.
+In order for `fpd` to receive queries from Fiberplane Notebooks, it needs to be authorized. This step will generate a **Daemon API Token** that will be needed in later steps.
 
-To register a proxy run a command `fp proxies create`:
+To register an `fpd` run a command `fp daemon create`:
 
 ```
-$ fp proxies create
+$ fp daemon create
 Added proxy "robust-antelope" # generates a random name
 Proxy API Token: XXX_XX # and a token - save this for later!
 ```
 
-### Step 3: Deploy the Proxy to your Kubernetes cluster
 
-1. Clone this repository and grab the example configuration files from `proxy-kubernetes/` folder.
-2. In the `configmap.yaml` set the name, type, and the URL of the data sources (you can use the existing template).
-3. In the `deployment.yaml` add the Proxy API Token generated earlier.
-4. Place both `configmap.yaml` and `deployment.yaml` at the root of your project directory.
-5. Apply the changes to your Kubernetes cluster by running the following commands:
-
-```shell
-kubectl apply -f configmap.yaml
-kubectl apply -f deployment.yaml
-```
-
-6. Kubernetes will automatically download, install, and configure the Fiberplane Proxy container from the [Docker Hub](https://hub.docker.com/r/fiberplane/fpd).
-
-Once you complete your Proxy setup, your data sources linked in the Proxy configuration should be recognized by the Studio - you can verify this again by going to the **Settings** screen.👇
-
-![List of data sources in settings](assets/proxy-datasource.png)
-
-### Step 3b: Run the Proxy locally for testing
-
-**Note:** this option is only recommended for testing purposes. If you intend to run the Proxy in production, it is strongly recommended to install it in your production cluster (see instructions above).
+### Step 3: Run the Daemon locally for testing
 
 1. Make sure you have [Docker](https://docs.docker.com/get-docker/) installed.
-2. Copy the `data_sources.yaml` example file and place it in the project root directory.
-3. Run the following command replacing `{PROXY_API_TOKEN}` with the API token generated earlier:
+2. Create a `data_sources.yaml` in the current directory in the following format:
 
-```shell
+```yaml
+# data_sources.yaml
+#
+# Replace the following line with the name of the data source
+- name: prometheus-prod
+  description: Prometheus (Production)
+  providerType: prometheus
+  config:
+    # Replace the following line with your Prometheus URL
+    url: http://prometheus
+```
+
+<!--markdownlint-disable-next-line-->
+3. Run the following command replacing `<FPD_API_TOKEN>` with the `fpd` API Token created earlier:
+
+```bash
 docker run \
   -v "$PWD/data_sources.yaml:/app/data_sources.yaml" \
-  fiberplane/proxy:v2 \
-  --token={PROXY_API_TOKEN}`
+  fiberplane/fpd:v2 \
+  --token=<FPD_API_TOKEN>
 ```
 
 ## Feedback and support
