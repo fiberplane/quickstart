@@ -28,14 +28,14 @@ services:
     depends_on:
       - node-exporter
 
-  fp-proxy:
-    image: fiberplane/proxy:v2
-    container_name: fp-proxy
+  fpd:
+    image: fiberplane/fpd:v2
+    container_name: fpd
     restart: unless-stopped
     volumes:
       - ./data_sources.yaml:/app/data_sources.yaml
     command:
-      - --token=${FP_PROXY_TOKEN:?err}
+      - --token=${FPD_API_TOKEN:?err}
     depends_on:
       - prometheus
       - node-exporter
