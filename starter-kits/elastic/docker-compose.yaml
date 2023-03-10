@@ -32,11 +32,11 @@ services:
     depends_on:
       - fluent-bit
 
-  fp-proxy:
-    image: fiberplane/proxy:v2
+  fpd:
+    image: fiberplane/fpd:v2
     restart: unless-stopped
     volumes:
       - ./data_sources.yaml:/app/data_sources.yaml
     command:
       - --status-check-interval=5s
-      - --token=${FP_PROXY_TOKEN:?err}
+      - --token=${FPD_API_TOKEN:?err}
